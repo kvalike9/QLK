@@ -94,6 +94,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\ColorALDAO.cs" />
     <Compile Include="DAO\ConnectionDAO.cs" />
     <Compile Include="DAO\SupplierDAO.cs" />
     <Compile Include="DAO\UnitDAO.cs" />
