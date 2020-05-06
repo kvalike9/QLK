@@ -1,5 +1,6 @@
 ﻿using Bunifu.Framework.UI;
 using Bunifu.UI.WinForms.BunifuButton;
+using Bunifu.UI.WinForms.BunifuTextbox;
 using QLK.DAO;
 using QLK.VALIDATOR;
 using System;
@@ -23,10 +24,95 @@ namespace QLK
 
         private void fAddEditDelete_Load(object sender, EventArgs e)
         {
+            
             addControlDock();
-            txtUnitId.Visible = false;
             LoadUnit();
+            LoadColor();
+            LoadGeneration();
             LoadSupplier();
+            HideAllID();
+        }
+
+        private DataGridViewButtonColumn addButtonDataGrid(string name)
+        {
+            DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
+            btn.HeaderText = name;
+            btn.Name = "button";
+            btn.Text = name;
+            btn.UseColumnTextForButtonValue = true;
+            return btn;
+        }
+
+        private void addControlDock()
+        {
+            bunifuFormDock1.SubscribeControlsToDragEvents(new Control[] {
+                pnTop,SeparatorTop,
+                tabUnit,tabColor,tabGeneration,tabSupplier,tabCustomer,tabUser,
+                pnUnit,pnColorLeft,pnGenerationLeft,
+                pcUnit,pcColor,pcGeneration,
+                lbUnit,lbColor,lbGeneration,
+                dtgvUnit,dtgvColor,dtgvGeneration,dtgvSupplier,dtgvCustomer,
+            }, false);
+        }
+
+        public Image getValidatorImage(bool Valid)
+        {
+            if (Valid)
+            {
+                return imageListCheck.Images[0];
+            }
+            return imageListCheck.Images[1];
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void HideAllID()
+        {
+            txtUnitId.Enabled = false;
+            txtColorId.Enabled = false;
+            txtGenerationId.Enabled = false;
+        }
+
+        private void LoadUnit()
+        {
+            dtgvUnit.Columns.Clear();
+            dtgvUnit.DataSource = UnitDAO.Ins.LoadUnit();
+            dtgvUnit.Columns[0].HeaderText = "Id";
+            dtgvUnit.Columns[0].Width = 50;
+            dtgvUnit.Columns[1].HeaderText = "Tên đơn vị";
+            dtgvUnit.Columns.Add(addButtonDataGrid("Edit"));
+            dtgvUnit.Columns.Add(addButtonDataGrid("Delete"));
+            dtgvUnit.Columns[2].Width = 40;
+            dtgvUnit.Columns[3].Width = 60;
+        }
+
+        private void LoadColor()
+        {
+            dtgvColor.Columns.Clear();
+            dtgvColor.DataSource = ColorALDAO.Ins.LoadColor();
+            dtgvColor.Columns[0].HeaderText = "Id";
+            dtgvColor.Columns[0].Width = 50;
+            dtgvColor.Columns[1].HeaderText = "Tên màu";
+            dtgvColor.Columns.Add(addButtonDataGrid("Edit"));
+            dtgvColor.Columns.Add(addButtonDataGrid("Delete"));
+            dtgvColor.Columns[2].Width = 40;
+            dtgvColor.Columns[3].Width = 60;
+        }
+
+        private void LoadGeneration()
+        {
+            dtgvGeneration.Columns.Clear();
+            dtgvGeneration.DataSource = GenerationDAO.Ins.LoadGeneration();
+            dtgvGeneration.Columns[0].HeaderText = "Id";
+            dtgvGeneration.Columns[0].Width = 50;
+            dtgvGeneration.Columns[1].HeaderText = "Tên hệ";
+            dtgvGeneration.Columns.Add(addButtonDataGrid("Edit"));
+            dtgvGeneration.Columns.Add(addButtonDataGrid("Delete"));
+            dtgvGeneration.Columns[2].Width = 40;
+            dtgvGeneration.Columns[3].Width = 60;
         }
 
         private void LoadSupplier()
@@ -45,56 +131,28 @@ namespace QLK
             dtgvSupplier.Columns.Add(addButtonDataGrid("Delete"));
         }
 
-        private void LoadUnit()
+        private void LoadCustomer()
         {
-            dtgvUnit.Columns.Clear();
-            dtgvUnit.DataSource = UnitDAO.Ins.LoadUnit();
-            dtgvUnit.Columns[0].HeaderText = "Id";
-            dtgvUnit.Columns[0].Width = 50;
-            dtgvUnit.Columns[1].HeaderText = "Tên đơn vị";
-            dtgvUnit.Columns.Add(addButtonDataGrid("Edit"));
-            dtgvUnit.Columns.Add(addButtonDataGrid("Delete"));
-            dtgvUnit.Columns[2].Width = 40;
-            dtgvUnit.Columns[3].Width = 60;
+            dtgvSupplier.Columns.Clear();
+            dtgvSupplier.DataSource = SupplierDAO.Ins.LoadSupplier();
+            dtgvSupplier.Columns[0].HeaderText = "Id";
+            dtgvSupplier.Columns[1].HeaderText = "Tên NCC";
+            dtgvSupplier.Columns[2].HeaderText = "Địa chỉ";
+            dtgvSupplier.Columns[3].HeaderText = "SĐT";
+            dtgvSupplier.Columns[4].HeaderText = "Email";
+            dtgvSupplier.Columns[5].HeaderText = "Thông tin";
+            dtgvSupplier.Columns[6].HeaderText = "Ngày hợp tác";
+
+            dtgvSupplier.Columns.Add(addButtonDataGrid("Edit"));
+            dtgvSupplier.Columns.Add(addButtonDataGrid("Delete"));
         }
 
-        private DataGridViewButtonColumn addButtonDataGrid(string name)
+        private void LoadUser()
         {
-            DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
-            btn.HeaderText = name;
-            btn.Name = "button";
-            btn.Text = name;
-            btn.UseColumnTextForButtonValue = true;
-            return btn;
+            //User load datagridview
         }
 
-        private void addControlDock()
-        {
-            bunifuFormDock1.SubscribeControlsToDragEvents(new Control[] {
-                pnTop,
-                bunifuGradientPanel1,
-                tabUnit,
-                tabColor,
-                bunifuSeparator1,
-                pnUnit,
-                pcUnit,
-                lbUnit
-            }, false);
-        }
-        
-        public Image getValidatorImage(bool Valid)
-        {
-            if (Valid)
-            {
-                return imageListCheck.Images[0];
-            }
-            return imageListCheck.Images[1];
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+       
 
         private void btnUnit_Click(object sender, EventArgs e)
         {
@@ -105,16 +163,19 @@ namespace QLK
         private void btnColor_Click(object sender, EventArgs e)
         {
             PageAddEditDelete.SetPage(1);
+            LoadColor();
         }
 
         private void btnGeneration_Click(object sender, EventArgs e)
         {
             PageAddEditDelete.SetPage(2);
+            LoadGeneration();
         }
 
         private void btnSupplier_Click(object sender, EventArgs e)
         {
             PageAddEditDelete.SetPage(3);
+            LoadSupplier();
         }
 
         private void btnCustomer_Click(object sender, EventArgs e)
@@ -141,10 +202,10 @@ namespace QLK
             }
             if (e.RowIndex != -1 && e.ColumnIndex == 3)
             {
-                string mess = dtgvUnit.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string mess = dtgvUnit.Rows[e.RowIndex].Cells["Displayname"].Value.ToString();
                 if (MessageBox.Show("Bạn chắc chắn muốn xóa \""+ mess +"\"", "Delete", MessageBoxButtons.YesNo)== DialogResult.Yes)
                 {
-                    int IdUnit = int.Parse(dtgvUnit.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    int IdUnit = int.Parse(dtgvUnit.Rows[e.RowIndex].Cells["Id"].Value.ToString());
                     try
                     {
                         if (UnitDAO.Ins.DeleteUnit(IdUnit))
@@ -159,7 +220,72 @@ namespace QLK
                    
                 }
             }
+        }
 
+        private void dtgvColor_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1 && e.ColumnIndex == 2)
+            {
+                lbColor.Text = "Edit Color";
+                btnAddColor.Text = "Sửa";
+                txtColor.DataBindings.Clear();
+                txtColorId.DataBindings.Clear();
+                txtColor.DataBindings.Add(new Binding("Text", dtgvColor.DataSource, "Displayname", true, DataSourceUpdateMode.OnPropertyChanged));
+                txtColorId.DataBindings.Add(new Binding("Text", dtgvColor.DataSource, "Id", true, DataSourceUpdateMode.OnPropertyChanged));
+            }
+            if (e.RowIndex != -1 && e.ColumnIndex == 3)
+            {
+                string mess = dtgvColor.Rows[e.RowIndex].Cells["Displayname"].Value.ToString();
+                if (MessageBox.Show("Bạn chắc chắn muốn xóa \"" + mess + "\"", "Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    int IdColor = int.Parse(dtgvColor.Rows[e.RowIndex].Cells["Id"].Value.ToString());
+                    try
+                    {
+                        if (ColorALDAO.Ins.DeleteColor(IdColor))
+                        {
+                            LoadColor();
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Đơn vị này đang được sử dụng không thể xóa");
+                    }
+
+                }
+            }
+        }
+
+        private void dtgvGeneration_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1 && e.ColumnIndex == 2)
+            {
+                lbGeneration.Text = "Edit Generation";
+                btnAddGenneration.Text = "Sửa";
+                txtGeneration.DataBindings.Clear();
+                txtGenerationId.DataBindings.Clear();
+                txtGeneration.DataBindings.Add(new Binding("Text", dtgvGeneration.DataSource, "Displayname", true, DataSourceUpdateMode.OnPropertyChanged));
+                txtGenerationId.DataBindings.Add(new Binding("Text", dtgvGeneration.DataSource, "Id", true, DataSourceUpdateMode.OnPropertyChanged));
+            }
+            if (e.RowIndex != -1 && e.ColumnIndex == 3)
+            {
+                string mess = dtgvGeneration.Rows[e.RowIndex].Cells[1].Value.ToString();
+                if (MessageBox.Show("Bạn chắc chắn muốn xóa \"" + mess + "\"", "Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    int IdGeneration = int.Parse(dtgvGeneration.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    try
+                    {
+                        if (GenerationDAO.Ins.DeleteGeneration(IdGeneration))
+                        {
+                            LoadGeneration();
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Đơn vị này đang được sử dụng không thể xóa");
+                    }
+
+                }
+            }
         }
 
         private void txtUnit_TextChanged(object sender, EventArgs e)
@@ -200,6 +326,89 @@ namespace QLK
             }
         }
 
+        private void btnAddColor_Click(object sender, EventArgs e)
+        {
+            if (Validator.isValidUnit(txtColor.Text) && btnAddColor.Text == "Thêm")
+            {
+                if (ColorALDAO.Ins.CreateColor(txtColor.Text))
+                {
+                    MessageBox.Show("Tạo thành công");
+                    LoadColor();
+                }
+                else
+                {
+                    MessageBox.Show("Màu này đã được tạo");
+                }
+            }
+            if (Validator.isValidUnit(txtColor.Text) && btnAddColor.Text == "Sửa")
+            {
+                if (ColorALDAO.Ins.UpdateColor(int.Parse(txtColorId.Text), txtColor.Text))
+                {
+                    MessageBox.Show("Cập nhật thành công");
+                    lbColor.Text = "Add Color";
+                    btnAddColor.Text = "Thêm";
+                    txtColor.Text = "";
+                    txtColor.DataBindings.Clear();
+                    txtColorId.DataBindings.Clear();
+                    LoadColor();
+                }
+                else
+                {
+                    MessageBox.Show("Màu này đã được tạo");
+                }
+            }
+        }
+
+        private void btnAddGenneration_Click(object sender, EventArgs e)
+        {
+            if (Validator.isValidUnit(txtGeneration.Text) && btnAddGenneration.Text == "Thêm")
+            {
+                if (GenerationDAO.Ins.CreateGeneration(txtGeneration.Text))
+                {
+                    MessageBox.Show("Tạo thành công");
+                    LoadGeneration();
+                }
+                else
+                {
+                    MessageBox.Show("Hệ này đã được tạo");
+                }
+            }
+            if (Validator.isValidUnit(txtGeneration.Text) && btnAddGenneration.Text == "Sửa")
+            {
+                if (GenerationDAO.Ins.UpdateGeneration(int.Parse(txtGenerationId.Text), txtGeneration.Text))
+                {
+                    MessageBox.Show("Cập nhật thành công");
+                    lbGeneration.Text = "Add Generation";
+                    btnAddGenneration.Text = "Thêm";
+                    txtGeneration.Text = "";
+                    txtGeneration.DataBindings.Clear();
+                    txtGenerationId.DataBindings.Clear();
+                    LoadGeneration();
+                }
+                else
+                {
+                    MessageBox.Show("Hệ này đã được tạo");
+                }
+            }
+        }
+
+        private void btnAddSupplier_Click(object sender, EventArgs e)
+        {
+            if (Validator.isValidUnit(txtSupplierName.Text) && Validator.isValidPhoneNumber(txtSupplierPhone.Text))
+            {
+                if (SupplierDAO.Ins.CreateSuppler(txtSupplierName.Text, txtSupplierAddress.Text, txtSupplierPhone.Text, txtSupplierEmail.Text, txtSupplierInfo.Text, dtpkSupplierDate.Value.ToString("yyyy/MM/dd")))
+                {
+                    MessageBox.Show("Tạo thành công");
+                    LoadSupplier();
+                }
+                else
+                {
+                    MessageBox.Show("Chắc có lỗi gì đó :V");
+                }
+            }
+
+        }
+
         private void txtSupplierName_TextChanged(object sender, EventArgs e)
         {
             txtSupplierName.IconRight = getValidatorImage(Validator.isValidUnit(txtSupplierName.Text));
@@ -224,23 +433,5 @@ namespace QLK
         {
 
         }
-
-        private void btnAddSupplier_Click(object sender, EventArgs e)
-        {
-            if (Validator.isValidUnit(txtSupplierName.Text) && Validator.isValidPhoneNumber(txtSupplierPhone.Text))
-            {
-                if (SupplierDAO.Ins.CreateSuppler(txtSupplierName.Text,txtSupplierAddress.Text,txtSupplierPhone.Text,txtSupplierEmail.Text,txtSupplierInfo.Text, dtpkSupplierDate.Value.ToString("yyyy/MM/dd")))
-                {
-                    MessageBox.Show("Tạo thành công");
-                    LoadSupplier();
-                }
-                else
-                {
-                    MessageBox.Show("Chắc có lỗi gì đó :V");
-                }
-            }
-
-        }
-
     }
 }

@@ -23,7 +23,7 @@ namespace QLK.DAO
         public List<ColorAL> LoadColor()
         {
             List<ColorAL> colors = new List<ColorAL>();
-            DataTable data = ConnectionDAO.Ins.ExecuteQuery("sp_ShowUnit");
+            DataTable data = ConnectionDAO.Ins.ExecuteQuery("sp_ShowColor");
             foreach (DataRow item in data.Rows)
             {
                 ColorAL color = new ColorAL(item);

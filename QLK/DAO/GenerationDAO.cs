@@ -20,10 +20,10 @@ namespace QLK.DAO
 
         private GenerationDAO() { }
 
-        public List<Generation> LoadColor()
+        public List<Generation> LoadGeneration()
         {
             List<Generation> generations = new List<Generation>();
-            DataTable data = ConnectionDAO.Ins.ExecuteQuery("sp_ShowUnit");
+            DataTable data = ConnectionDAO.Ins.ExecuteQuery("sp_ShowGeneration");
             foreach (DataRow item in data.Rows)
             {
                 Generation generation = new Generation(item);
