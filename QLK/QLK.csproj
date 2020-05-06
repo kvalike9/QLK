@@ -96,6 +96,7 @@
   <ItemGroup>
     <Compile Include="DAO\ColorALDAO.cs" />
     <Compile Include="DAO\ConnectionDAO.cs" />
+    <Compile Include="DAO\GenerationDAO.cs" />
     <Compile Include="DAO\SupplierDAO.cs" />
     <Compile Include="DAO\UnitDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
