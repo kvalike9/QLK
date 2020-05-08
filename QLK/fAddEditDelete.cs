@@ -157,14 +157,16 @@ namespace QLK
         private void btnUnit_Click(object sender, EventArgs e)
         {
             tabLoad1.BringToFront();
+            tabLoad1.Show();
             PageAddEditDelete.SetPage(0);
             LoadUnit();
             timerLoadPage.Start();
         }
-        
+
         private void btnColor_Click(object sender, EventArgs e)
         {
             tabLoad1.BringToFront();
+            tabLoad1.Show();
             PageAddEditDelete.SetPage(1);
             LoadColor();
             timerLoadPage.Start();
@@ -173,6 +175,7 @@ namespace QLK
         private void btnGeneration_Click(object sender, EventArgs e)
         {
             tabLoad1.BringToFront();
+            tabLoad1.Show();
             PageAddEditDelete.SetPage(2);
             LoadGeneration();
             timerLoadPage.Start();
@@ -181,6 +184,7 @@ namespace QLK
         private void btnSupplier_Click(object sender, EventArgs e)
         {
             tabLoad1.BringToFront();
+            tabLoad1.Show();
             PageAddEditDelete.SetPage(3);
             LoadSupplier();
             timerLoadPage.Start();
@@ -189,6 +193,7 @@ namespace QLK
         private void btnCustomer_Click(object sender, EventArgs e)
         {
             tabLoad1.BringToFront();
+            tabLoad1.Show();
             PageAddEditDelete.SetPage(4);
             LoadCustomer();
             timerLoadPage.Start();
@@ -197,6 +202,7 @@ namespace QLK
         private void btnUser_Click(object sender, EventArgs e)
         {
             tabLoad1.BringToFront();
+            tabLoad1.Show();
             PageAddEditDelete.SetPage(5);
             timerLoadPage.Start();
         }
@@ -465,8 +471,7 @@ namespace QLK
 
         private void timerLoadPage_Tick(object sender, EventArgs e)
         {
-            tabLoad1.SendToBack();
-
+            TransitionPage.Hide(tabLoad1);
             timerLoadPage.Stop();
         }
     }
