@@ -24,13 +24,14 @@ namespace QLK
 
         private void fAddEditDelete_Load(object sender, EventArgs e)
         {
-            
+            tabLoad1.BringToFront();
             addControlDock();
             LoadUnit();
             LoadColor();
             LoadGeneration();
             LoadSupplier();
             HideAllID();
+            timerLoadPage.Start();
         }
 
         private DataGridViewButtonColumn addButtonDataGrid(string name)
@@ -75,7 +76,7 @@ namespace QLK
             txtColorId.Enabled = false;
             txtGenerationId.Enabled = false;
         }
-
+        //Load data
         private void LoadUnit()
         {
             dtgvUnit.Columns.Clear();
@@ -133,18 +134,18 @@ namespace QLK
 
         private void LoadCustomer()
         {
-            dtgvSupplier.Columns.Clear();
-            dtgvSupplier.DataSource = SupplierDAO.Ins.LoadSupplier();
-            dtgvSupplier.Columns[0].HeaderText = "Id";
-            dtgvSupplier.Columns[1].HeaderText = "Tên NCC";
-            dtgvSupplier.Columns[2].HeaderText = "Địa chỉ";
-            dtgvSupplier.Columns[3].HeaderText = "SĐT";
-            dtgvSupplier.Columns[4].HeaderText = "Email";
-            dtgvSupplier.Columns[5].HeaderText = "Thông tin";
-            dtgvSupplier.Columns[6].HeaderText = "Ngày hợp tác";
+            dtgvCustomer.Columns.Clear();
+            dtgvCustomer.DataSource = CustomerDAO.Ins.LoadCustomer();
+            dtgvCustomer.Columns[0].HeaderText = "Id";
+            dtgvCustomer.Columns[1].HeaderText = "Tên KH";
+            dtgvCustomer.Columns[2].HeaderText = "Địa chỉ";
+            dtgvCustomer.Columns[3].HeaderText = "SĐT";
+            dtgvCustomer.Columns[4].HeaderText = "Email";
+            dtgvCustomer.Columns[5].HeaderText = "Thông tin";
+            dtgvCustomer.Columns[6].HeaderText = "Ngày hợp tác";
 
-            dtgvSupplier.Columns.Add(addButtonDataGrid("Edit"));
-            dtgvSupplier.Columns.Add(addButtonDataGrid("Delete"));
+            dtgvCustomer.Columns.Add(addButtonDataGrid("Edit"));
+            dtgvCustomer.Columns.Add(addButtonDataGrid("Delete"));
         }
 
         private void LoadUser()
@@ -152,42 +153,54 @@ namespace QLK
             //User load datagridview
         }
 
-       
-
+        //Load TabPage
         private void btnUnit_Click(object sender, EventArgs e)
         {
+            tabLoad1.BringToFront();
             PageAddEditDelete.SetPage(0);
             LoadUnit();
+            timerLoadPage.Start();
         }
-
+        
         private void btnColor_Click(object sender, EventArgs e)
         {
+            tabLoad1.BringToFront();
             PageAddEditDelete.SetPage(1);
             LoadColor();
+            timerLoadPage.Start();
         }
 
         private void btnGeneration_Click(object sender, EventArgs e)
         {
+            tabLoad1.BringToFront();
             PageAddEditDelete.SetPage(2);
             LoadGeneration();
+            timerLoadPage.Start();
         }
 
         private void btnSupplier_Click(object sender, EventArgs e)
         {
+            tabLoad1.BringToFront();
             PageAddEditDelete.SetPage(3);
             LoadSupplier();
+            timerLoadPage.Start();
         }
 
         private void btnCustomer_Click(object sender, EventArgs e)
         {
+            tabLoad1.BringToFront();
             PageAddEditDelete.SetPage(4);
+            LoadCustomer();
+            timerLoadPage.Start();
         }
 
         private void btnUser_Click(object sender, EventArgs e)
         {
+            tabLoad1.BringToFront();
             PageAddEditDelete.SetPage(5);
+            timerLoadPage.Start();
         }
-
+        //Binding and Delete
         private void dtgvUnit_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1 && e.ColumnIndex == 2)
@@ -287,12 +300,37 @@ namespace QLK
                 }
             }
         }
-
+        //Validator
         private void txtUnit_TextChanged(object sender, EventArgs e)
         {
             txtUnit.IconRight = getValidatorImage(Validator.isValidUnit(txtUnit.Text));
         }
 
+        private void txtSupplierName_TextChanged(object sender, EventArgs e)
+        {
+            txtSupplierName.IconRight = getValidatorImage(Validator.isValidUnit(txtSupplierName.Text));
+        }
+
+        private void txtSupplierAddress_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSupplierPhone_TextChanged(object sender, EventArgs e)
+        {
+            txtSupplierPhone.IconRight = getValidatorImage(Validator.isValidPhoneNumber(txtSupplierPhone.Text));
+        }
+
+        private void txtSupplierEmail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSupplierInfo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        //Add and Edit
         private void btnAddUnit_Click(object sender, EventArgs e)
         {
             if (Validator.isValidUnit(txtUnit.Text) && btnAddUnit.Text == "Thêm")
@@ -409,29 +447,27 @@ namespace QLK
 
         }
 
-        private void txtSupplierName_TextChanged(object sender, EventArgs e)
+        private void btnCustomerAdd_Click(object sender, EventArgs e)
         {
-            txtSupplierName.IconRight = getValidatorImage(Validator.isValidUnit(txtSupplierName.Text));
+            if (Validator.isValidUnit(txtCustomerName.Text) && Validator.isValidPhoneNumber(txtCustomerPhone.Text))
+            {
+                if (CustomerDAO.Ins.CreateCustomer(txtCustomerName.Text, txtCustomerAddress.Text, txtCustomerPhone.Text, txtCustomerEmail.Text, txtCustomerInfo.Text, dtpkCustomerDate.Value.ToString("yyyy/MM/dd")))
+                {
+                    MessageBox.Show("Tạo thành công");
+                    LoadCustomer();
+                }
+                else
+                {
+                    MessageBox.Show("Chắc có lỗi gì đó :V");
+                }
+            }
         }
 
-        private void txtSupplierAddress_TextChanged(object sender, EventArgs e)
+        private void timerLoadPage_Tick(object sender, EventArgs e)
         {
+            tabLoad1.SendToBack();
 
-        }
-
-        private void txtSupplierPhone_TextChanged(object sender, EventArgs e)
-        {
-            txtSupplierPhone.IconRight = getValidatorImage(Validator.isValidPhoneNumber(txtSupplierPhone.Text));
-        }
-
-        private void txtSupplierEmail_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtSupplierInfo_TextChanged(object sender, EventArgs e)
-        {
-
+            timerLoadPage.Stop();
         }
     }
 }
