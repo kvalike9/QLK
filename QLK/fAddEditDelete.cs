@@ -48,11 +48,11 @@ namespace QLK
         private void addControlDock()
         {
             bunifuFormDock1.SubscribeControlsToDragEvents(new Control[] {
-                pnTop,SeparatorTop,
+                pnTop,SeparatorTop,tabLoad1,
                 tabUnit,tabColor,tabGeneration,tabSupplier,tabCustomer,tabUser,
-                pnUnit,pnColorLeft,pnGenerationLeft,
-                pcUnit,pcColor,pcGeneration,
-                lbUnit,lbColor,lbGeneration,
+                pnUnit,pnColorLeft,pnGenerationLeft,pnSupplierLeft,pnCustomerLeft,
+                pcUnit,pcColor,pcGeneration,pcSupplier,pcCustomer,pcUser,
+                lbUnit,lbColor,lbGeneration,lbSupplier,lbCustomer,lbError,
                 dtgvUnit,dtgvColor,dtgvGeneration,dtgvSupplier,dtgvCustomer,
             }, false);
         }

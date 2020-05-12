@@ -32,7 +32,7 @@ namespace QLK
                 CircleProgressLoadcon.AnimationSpeed = 4;
             }
             CircleProgressLoad.Value += dir;
-            CircleProgressLoadcon.Value = 100 - CircleProgressLoad.Value;
+            CircleProgressLoadcon.Value = 90 - CircleProgressLoad.Value;
 
         }
     }
