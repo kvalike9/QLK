@@ -30,6 +30,7 @@ namespace QLK
             LoadColor();
             LoadGeneration();
             LoadSupplier();
+            LoadCustomer();
             HideAllID();
             timerLoadPage.Start();
         }
@@ -75,6 +76,16 @@ namespace QLK
             txtUnitId.Enabled = false;
             txtColorId.Enabled = false;
             txtGenerationId.Enabled = false;
+        }
+
+        private void BindingAddText(Control control, string propetyName, DataGridView dataGridView, string dataMember)
+        {
+            control.DataBindings.Add(new Binding(propetyName, dataGridView.DataSource, dataMember, true, DataSourceUpdateMode.OnPropertyChanged));
+        }
+
+        private void BindingClearText(Control control)
+        {
+            control.DataBindings.Clear();
         }
         //Load data
         private void LoadUnit()
@@ -214,10 +225,10 @@ namespace QLK
                 //MessageBox.Show(dtgvUnit.Rows[e.RowIndex].Cells[0].Value.ToString());
                 lbUnit.Text = "Edit Unit";
                 btnAddUnit.Text = "Sửa";
-                txtUnit.DataBindings.Clear();
-                txtUnitId.DataBindings.Clear();
-                txtUnit.DataBindings.Add(new Binding("Text", dtgvUnit.DataSource, "Displayname",true,DataSourceUpdateMode.OnPropertyChanged));
-                txtUnitId.DataBindings.Add(new Binding("Text", dtgvUnit.DataSource, "Id",true,DataSourceUpdateMode.OnPropertyChanged));
+                BindingClearText(txtUnitId);
+                BindingClearText(txtUnit);
+                BindingAddText(txtUnitId, "Text", dtgvUnit, "Id");
+                BindingAddText(txtUnit, "Text", dtgvUnit, "DisplayName");
             }
             if (e.RowIndex != -1 && e.ColumnIndex == 3)
             {
@@ -232,7 +243,7 @@ namespace QLK
                             LoadUnit();
                         }
                     }
-                    catch (Exception)
+                    catch
                     {
                         MessageBox.Show("Đơn vị này đang được sử dụng không thể xóa");
                     }
@@ -247,10 +258,10 @@ namespace QLK
             {
                 lbColor.Text = "Edit Color";
                 btnAddColor.Text = "Sửa";
-                txtColor.DataBindings.Clear();
-                txtColorId.DataBindings.Clear();
-                txtColor.DataBindings.Add(new Binding("Text", dtgvColor.DataSource, "Displayname", true, DataSourceUpdateMode.OnPropertyChanged));
-                txtColorId.DataBindings.Add(new Binding("Text", dtgvColor.DataSource, "Id", true, DataSourceUpdateMode.OnPropertyChanged));
+                BindingClearText(txtColorId);
+                BindingClearText(txtColor);
+                BindingAddText(txtColorId, "Text", dtgvColor, "Id");
+                BindingAddText(txtColor, "Text", dtgvColor, "DisplayName");
             }
             if (e.RowIndex != -1 && e.ColumnIndex == 3)
             {
@@ -265,7 +276,7 @@ namespace QLK
                             LoadColor();
                         }
                     }
-                    catch (Exception)
+                    catch
                     {
                         MessageBox.Show("Đơn vị này đang được sử dụng không thể xóa");
                     }
@@ -280,10 +291,10 @@ namespace QLK
             {
                 lbGeneration.Text = "Edit Generation";
                 btnAddGenneration.Text = "Sửa";
-                txtGeneration.DataBindings.Clear();
-                txtGenerationId.DataBindings.Clear();
-                txtGeneration.DataBindings.Add(new Binding("Text", dtgvGeneration.DataSource, "Displayname", true, DataSourceUpdateMode.OnPropertyChanged));
-                txtGenerationId.DataBindings.Add(new Binding("Text", dtgvGeneration.DataSource, "Id", true, DataSourceUpdateMode.OnPropertyChanged));
+                BindingClearText(txtGenerationId);
+                BindingClearText(txtGeneration);
+                BindingAddText(txtGenerationId, "Text", dtgvGeneration, "Id");
+                BindingAddText(txtGeneration, "Text", dtgvGeneration, "DisplayName");
             }
             if (e.RowIndex != -1 && e.ColumnIndex == 3)
             {
@@ -298,7 +309,7 @@ namespace QLK
                             LoadGeneration();
                         }
                     }
-                    catch (Exception)
+                    catch
                     {
                         MessageBox.Show("Đơn vị này đang được sử dụng không thể xóa");
                     }
@@ -306,6 +317,95 @@ namespace QLK
                 }
             }
         }
+
+        private void dtgvSupplier_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1 && e.ColumnIndex == 7)
+            {
+                lbSupplier.Text = "Edit Supplier";
+                btnAddSupplier.Text = "Sửa";
+                BindingClearText(txtSupplierId);
+                BindingClearText(txtSupplierName);
+                BindingClearText(txtSupplierAddress);
+                BindingClearText(txtSupplierPhone);
+                BindingClearText(txtSupplierEmail);
+                BindingClearText(txtSupplierInfo);
+                BindingClearText(dtpkSupplierDate);
+                BindingAddText(txtSupplierId, "Text", dtgvSupplier, "Id");
+                BindingAddText(txtSupplierName, "Text", dtgvSupplier, "Displayname");
+                BindingAddText(txtSupplierAddress, "Text", dtgvSupplier, "Address");
+                BindingAddText(txtSupplierPhone, "Text", dtgvSupplier, "Phone");
+                BindingAddText(txtSupplierEmail, "Text", dtgvSupplier, "Email");
+                BindingAddText(txtSupplierInfo, "Text", dtgvSupplier, "MoreInfo");
+                BindingAddText(dtpkSupplierDate, "Value", dtgvSupplier, "ContractDate");
+                //MessageBox.Show(dtpkSupplierDate.Value.ToString("dd/MM/yyyy"));
+            }
+            if (e.RowIndex != -1 && e.ColumnIndex == 8)
+            {
+                string mess = dtgvSupplier.Rows[e.RowIndex].Cells[1].Value.ToString();
+                if (MessageBox.Show("Bạn chắc chắn muốn xóa \"" + mess + "\"", "Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    int IdSupplier = int.Parse(dtgvSupplier.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    try
+                    {
+                        if (SupplierDAO.Ins.DeleteSupplier(IdSupplier))
+                        {
+                            LoadSupplier();
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Đơn vị này đang được sử dụng không thể xóa");
+                    }
+
+                }
+            }
+        }
+
+        private void dtgvCustomer_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.RowIndex != -1 && e.ColumnIndex == 7)
+            {
+                lbCustomer.Text = "Edit Customer";
+                btnCustomerAdd.Text = "Sửa";
+                BindingClearText(txtCustomerId);
+                BindingClearText(txtCustomerName);
+                BindingClearText(txtCustomerAddress);
+                BindingClearText(txtCustomerPhone);
+                BindingClearText(txtCustomerEmail);
+                BindingClearText(txtCustomerInfo);
+                BindingClearText(dtpkCustomerDate);
+                BindingAddText(txtCustomerId, "Text", dtgvCustomer, "Id");
+                BindingAddText(txtCustomerName, "Text", dtgvCustomer, "Displayname");
+                BindingAddText(txtCustomerAddress, "Text", dtgvCustomer, "Address");
+                BindingAddText(txtCustomerPhone, "Text", dtgvCustomer, "Phone");
+                BindingAddText(txtCustomerEmail, "Text", dtgvCustomer, "Email");
+                BindingAddText(txtCustomerInfo, "Text", dtgvCustomer, "MoreInfo");
+                BindingAddText(dtpkCustomerDate, "Value", dtgvCustomer, "ContractDate");
+            }
+            if (e.RowIndex != -1 && e.ColumnIndex == 8)
+            {
+                string mess = dtgvCustomer.Rows[e.RowIndex].Cells[1].Value.ToString();
+                if (MessageBox.Show("Bạn chắc chắn muốn xóa \"" + mess + "\"", "Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    int IdCustomer = int.Parse(dtgvCustomer.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    try
+                    {
+                        if (CustomerDAO.Ins.DeleteCustomer(IdCustomer))
+                        {
+                            LoadCustomer();
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Đơn vị này đang được sử dụng không thể xóa");
+                    }
+
+                }
+            }
+        }
+        
         //Validator
         private void txtUnit_TextChanged(object sender, EventArgs e)
         {
@@ -359,8 +459,8 @@ namespace QLK
                     lbUnit.Text = "Add Unit";
                     btnAddUnit.Text = "Thêm";
                     txtUnit.Text = "";
-                    txtUnit.DataBindings.Clear();
-                    txtUnitId.DataBindings.Clear();
+                    BindingClearText(txtUnitId);
+                    BindingClearText(txtUnit);
                     LoadUnit();
                 }
                 else
@@ -392,8 +492,8 @@ namespace QLK
                     lbColor.Text = "Add Color";
                     btnAddColor.Text = "Thêm";
                     txtColor.Text = "";
-                    txtColor.DataBindings.Clear();
-                    txtColorId.DataBindings.Clear();
+                    BindingClearText(txtColorId);
+                    BindingClearText(txtColor);
                     LoadColor();
                 }
                 else
@@ -425,8 +525,8 @@ namespace QLK
                     lbGeneration.Text = "Add Generation";
                     btnAddGenneration.Text = "Thêm";
                     txtGeneration.Text = "";
-                    txtGeneration.DataBindings.Clear();
-                    txtGenerationId.DataBindings.Clear();
+                    BindingClearText(txtGenerationId);
+                    BindingClearText(txtGeneration);
                     LoadGeneration();
                 }
                 else
@@ -438,7 +538,7 @@ namespace QLK
 
         private void btnAddSupplier_Click(object sender, EventArgs e)
         {
-            if (Validator.isValidUnit(txtSupplierName.Text) && Validator.isValidPhoneNumber(txtSupplierPhone.Text))
+            if (Validator.isValidUnit(txtSupplierName.Text) && Validator.isValidPhoneNumber(txtSupplierPhone.Text) && btnAddSupplier.Text == "Thêm")
             {
                 if (SupplierDAO.Ins.CreateSuppler(txtSupplierName.Text, txtSupplierAddress.Text, txtSupplierPhone.Text, txtSupplierEmail.Text, txtSupplierInfo.Text, dtpkSupplierDate.Value.ToString("yyyy/MM/dd")))
                 {
@@ -450,12 +550,33 @@ namespace QLK
                     MessageBox.Show("Chắc có lỗi gì đó :V");
                 }
             }
+            if (Validator.isValidUnit(txtSupplierName.Text) && btnAddSupplier.Text == "Sửa")
+            {
+                if (SupplierDAO.Ins.UpdateSuppler(int.Parse(txtSupplierId.Text), txtSupplierName.Text, txtSupplierAddress.Text, txtSupplierPhone.Text, txtSupplierEmail.Text, txtSupplierInfo.Text, dtpkSupplierDate.Value.ToString("yyyy/MM/dd")))
+                {
+                    MessageBox.Show("Cập nhật thành công");
+                    lbSupplier.Text = "Add Supplier";
+                    btnAddSupplier.Text = "Thêm";
+                    txtSupplierName.Text = "";
+                    BindingClearText(txtSupplierId);
+                    BindingClearText(txtSupplierName);
+                    BindingClearText(txtSupplierAddress);
+                    BindingClearText(txtSupplierPhone);
+                    BindingClearText(txtSupplierEmail);
+                    BindingClearText(txtSupplierInfo);
+                    LoadSupplier();
+                }
+                else
+                {
+                    MessageBox.Show("Nhà cung cấp này đã được tạo");
+                }
+            }
 
         }
 
         private void btnCustomerAdd_Click(object sender, EventArgs e)
         {
-            if (Validator.isValidUnit(txtCustomerName.Text) && Validator.isValidPhoneNumber(txtCustomerPhone.Text))
+            if (Validator.isValidUnit(txtCustomerName.Text) && Validator.isValidPhoneNumber(txtCustomerPhone.Text) && btnCustomerAdd.Text == "Thêm")
             {
                 if (CustomerDAO.Ins.CreateCustomer(txtCustomerName.Text, txtCustomerAddress.Text, txtCustomerPhone.Text, txtCustomerEmail.Text, txtCustomerInfo.Text, dtpkCustomerDate.Value.ToString("yyyy/MM/dd")))
                 {
@@ -467,6 +588,28 @@ namespace QLK
                     MessageBox.Show("Chắc có lỗi gì đó :V");
                 }
             }
+            if (Validator.isValidUnit(txtCustomerName.Text) && btnCustomerAdd.Text == "Sửa")
+            {
+                if (CustomerDAO.Ins.UpdateCustomer(int.Parse(txtCustomerId.Text), txtCustomerName.Text, txtCustomerAddress.Text, txtCustomerPhone.Text, txtCustomerEmail.Text, txtCustomerInfo.Text, dtpkCustomerDate.Value.ToString("yyyy/MM/dd")))
+                {
+                    MessageBox.Show("Cập nhật thành công");
+                    lbCustomer.Text = "Add Customer";
+                    btnCustomerAdd.Text = "Thêm";
+                    txtGeneration.Text = "";
+                    BindingClearText(txtCustomerId);
+                    BindingClearText(txtCustomerName);
+                    BindingClearText(txtCustomerAddress);
+                    BindingClearText(txtCustomerPhone);
+                    BindingClearText(txtCustomerEmail);
+                    BindingClearText(txtCustomerInfo);
+                    BindingClearText(dtpkCustomerDate);
+                    LoadCustomer();
+                }
+                else
+                {
+                    MessageBox.Show("Khách hàng này đã được tạo");
+                }
+            }
         }
 
         private void timerLoadPage_Tick(object sender, EventArgs e)
@@ -474,5 +617,6 @@ namespace QLK
             TransitionPage.Hide(tabLoad1);
             timerLoadPage.Stop();
         }
+        
     }
 }

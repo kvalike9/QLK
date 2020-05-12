@@ -37,5 +37,17 @@ namespace QLK.DAO
             int re = ConnectionDAO.Ins.ExecuteNonQuery("sp_AddSupplier @DisplayName , @Address , @Phone , @Email , @MoreInfo , @ContractDate", new object[] { Name, Address, Phone, Email, MoreInfo, ContractDate });
             return re > 0;
         }
+
+        public bool UpdateSuppler(int Id, string Name, string Address, string Phone, string Email, string MoreInfo, string ContractDate)
+        {
+            int re = ConnectionDAO.Ins.ExecuteNonQuery("sp_UpdateSupplier @Id , @DisplayName , @Address , @Phone , @Email , @MoreInfo , @ContractDate", new object[] { Id, Name, Address, Phone, Email, MoreInfo, ContractDate });
+            return re > 0;
+        }
+
+        public bool DeleteSupplier(int Id)
+        {
+            int re = ConnectionDAO.Ins.ExecuteNonQuery("sp_DeleteSupplier @Id", new object[] { Id });
+            return re > 0;
+        }
     }
 }
