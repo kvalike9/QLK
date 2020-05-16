@@ -116,6 +116,8 @@
     <Compile Include="DAO\SupplierDAO.cs" />
     <Compile Include="DAO\UnitDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
+    <Compile Include="DAO\UserRolesDAO.cs" />
+    <Compile Include="DAO\UsersDAO.cs" />
     <Compile Include="DTO\ColorAL.cs" />
     <Compile Include="DTO\Customer.cs" />
     <Compile Include="DTO\Generation.cs" />
@@ -128,6 +130,8 @@
     <Compile Include="DTO\Unit.cs" />
     <Compile Include="DTO\User.cs" />
     <Compile Include="DTO\UserRole.cs" />
+    <Compile Include="DTO\UserRoles.cs" />
+    <Compile Include="DTO\Users.cs" />
     <Compile Include="fAddEditDelete.cs">
       <SubType>Form</SubType>
     </Compile>

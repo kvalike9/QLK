@@ -31,6 +31,7 @@ namespace QLK
             LoadGeneration();
             LoadSupplier();
             LoadCustomer();
+            LoadUser();
             HideAllID();
             timerLoadPage.Start();
         }
@@ -45,6 +46,15 @@ namespace QLK
             return btn;
         }
 
+        private DataGridViewComboBoxColumn addComboboxDataGrid()
+        {
+            DataGridViewComboBoxColumn cbx = new DataGridViewComboBoxColumn();
+            cbx.DataSource = UserRolesDAO.Ins.LoadUserRoles().ToList();
+            cbx.DisplayMember = "DisplayName";
+            cbx.ValueMember = "Id";
+            return cbx;
+        }
+
         private void addControlDock()
         {
             bunifuFormDock1.SubscribeControlsToDragEvents(new Control[] {
@@ -53,7 +63,7 @@ namespace QLK
                 pnUnit,pnColorLeft,pnGenerationLeft,pnSupplierLeft,pnCustomerLeft,
                 pcUnit,pcColor,pcGeneration,pcSupplier,pcCustomer,pcUser,
                 lbUnit,lbColor,lbGeneration,lbSupplier,lbCustomer,lbError,
-                dtgvUnit,dtgvColor,dtgvGeneration,dtgvSupplier,dtgvCustomer,
+                dtgvUnit,dtgvColor,dtgvGeneration,dtgvSupplier,dtgvCustomer,dtgvUser,
             }, false);
         }
 
@@ -99,6 +109,14 @@ namespace QLK
             dtgvUnit.Columns.Add(addButtonDataGrid("Delete"));
             dtgvUnit.Columns[2].Width = 40;
             dtgvUnit.Columns[3].Width = 60;
+            bunifuDataGridView2.DataSource = UnitDAO.Ins.LoadUnit();
+            DataGridViewComboBoxColumn cbx = new DataGridViewComboBoxColumn();
+            cbx.HeaderText = "List";
+            cbx.DataSource = UserRolesDAO.Ins.LoadUserRoles();
+            cbx.DisplayMember = "DisplayName";
+            cbx.ValueMember = "Id";
+            bunifuDataGridView2.Columns.Add(cbx);
+            //dtgvUnit.Columns.Add(cbx);
         }
 
         private void LoadColor()
@@ -157,11 +175,23 @@ namespace QLK
 
             dtgvCustomer.Columns.Add(addButtonDataGrid("Edit"));
             dtgvCustomer.Columns.Add(addButtonDataGrid("Delete"));
+            dtgvCustomer.Columns.Add(addComboboxDataGrid());
+
         }
 
         private void LoadUser()
         {
             //User load datagridview
+            DropDownRoles.DataSource = UserRolesDAO.Ins.LoadUserRoles();
+            DropDownRoles.DisplayMember = "DisplayName";
+            DropDownRoles.ValueMember = "Id";
+            dtgvUser.Columns.Clear();
+            dtgvUser.DataSource = UsersDAO.Ins.LoadUsers();
+            dtgvUser.Columns[0].HeaderText = "Id";
+            dtgvUser.Columns[1].HeaderText = "Họ Tên";
+            dtgvUser.Columns[2].HeaderText = "Tên tài khoản";
+            dtgvUser.Columns[3].HeaderText = "Quyền";
+            dtgvUser.Columns[4].Visible = false;
         }
 
         //Load TabPage
@@ -405,7 +435,15 @@ namespace QLK
                 }
             }
         }
-        
+
+        private void dtgvUser_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                DropDownRoles.SelectedValue = int.Parse(dtgvUser.Rows[e.RowIndex].Cells[4].Value.ToString());
+            }
+        }
+
         //Validator
         private void txtUnit_TextChanged(object sender, EventArgs e)
         {
@@ -557,13 +595,21 @@ namespace QLK
                     MessageBox.Show("Cập nhật thành công");
                     lbSupplier.Text = "Add Supplier";
                     btnAddSupplier.Text = "Thêm";
-                    txtSupplierName.Text = "";
+
+                    txtSupplierId.Clear();
+                    txtSupplierName.Clear();
+                    txtSupplierAddress.Clear();
+                    txtSupplierPhone.Clear();
+                    txtSupplierEmail.Clear();
+                    txtSupplierInfo.Clear();
+
                     BindingClearText(txtSupplierId);
                     BindingClearText(txtSupplierName);
                     BindingClearText(txtSupplierAddress);
                     BindingClearText(txtSupplierPhone);
                     BindingClearText(txtSupplierEmail);
                     BindingClearText(txtSupplierInfo);
+                    BindingClearText(dtpkSupplierDate);
                     LoadSupplier();
                 }
                 else
@@ -595,7 +641,14 @@ namespace QLK
                     MessageBox.Show("Cập nhật thành công");
                     lbCustomer.Text = "Add Customer";
                     btnCustomerAdd.Text = "Thêm";
-                    txtGeneration.Text = "";
+
+                    txtCustomerId.Clear();
+                    txtCustomerName.Clear();
+                    txtCustomerAddress.Clear();
+                    txtCustomerPhone.Clear();
+                    txtCustomerEmail.Clear();
+                    txtCustomerInfo.Clear();
+
                     BindingClearText(txtCustomerId);
                     BindingClearText(txtCustomerName);
                     BindingClearText(txtCustomerAddress);
@@ -617,6 +670,7 @@ namespace QLK
             TransitionPage.Hide(tabLoad1);
             timerLoadPage.Stop();
         }
-        
+
+       
     }
 }

@@ -62,10 +62,10 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.bunifuButton1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.bunifuDropdown1 = new Bunifu.Framework.UI.BunifuDropdown();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.chart = new Bunifu.DataViz.WinForms.BunifuDataViz();
             this.DockControl = new Bunifu.UI.WinForms.BunifuFormDock();
+            this.bunifuCards1 = new Bunifu.Framework.UI.BunifuCards();
             this.bunifuGradientPanel1.SuspendLayout();
             this.panelLeft.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -470,10 +470,10 @@
             this.bunifuPages1.Location = new System.Drawing.Point(70, 50);
             this.bunifuPages1.Multiline = true;
             this.bunifuPages1.Name = "bunifuPages1";
-            this.bunifuPages1.Page = this.tabPage1;
-            this.bunifuPages1.PageIndex = 0;
-            this.bunifuPages1.PageName = "tabPage1";
-            this.bunifuPages1.PageTitle = "tabPage1";
+            this.bunifuPages1.Page = this.tabPage2;
+            this.bunifuPages1.PageIndex = 1;
+            this.bunifuPages1.PageName = "tabPage2";
+            this.bunifuPages1.PageTitle = "tabPage2";
             this.bunifuPages1.SelectedIndex = 0;
             this.bunifuPages1.Size = new System.Drawing.Size(1130, 750);
             this.bunifuPages1.TabIndex = 6;
@@ -574,31 +574,15 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.bunifuDropdown1);
+            this.tabPage2.Controls.Add(this.bunifuCards1);
             this.bunifuTransition1.SetDecoration(this.tabPage2, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.tabPage2.Location = new System.Drawing.Point(4, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1122, 714);
+            this.tabPage2.Size = new System.Drawing.Size(1122, 724);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // bunifuDropdown1
-            // 
-            this.bunifuDropdown1.BackColor = System.Drawing.Color.Transparent;
-            this.bunifuDropdown1.BorderRadius = 3;
-            this.bunifuTransition1.SetDecoration(this.bunifuDropdown1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
-            this.bunifuDropdown1.DisabledColor = System.Drawing.Color.Gray;
-            this.bunifuDropdown1.ForeColor = System.Drawing.Color.White;
-            this.bunifuDropdown1.items = new string[0];
-            this.bunifuDropdown1.Location = new System.Drawing.Point(22, 10);
-            this.bunifuDropdown1.Name = "bunifuDropdown1";
-            this.bunifuDropdown1.NomalColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
-            this.bunifuDropdown1.onHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(129)))), ((int)(((byte)(77)))));
-            this.bunifuDropdown1.selectedIndex = -1;
-            this.bunifuDropdown1.Size = new System.Drawing.Size(87, 35);
-            this.bunifuDropdown1.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -607,7 +591,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1122, 714);
+            this.tabPage3.Size = new System.Drawing.Size(1122, 724);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -635,7 +619,7 @@
             this.chart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chart.Location = new System.Drawing.Point(3, 3);
             this.chart.Name = "chart";
-            this.chart.Size = new System.Drawing.Size(1116, 708);
+            this.chart.Size = new System.Drawing.Size(1116, 718);
             this.chart.TabIndex = 0;
             this.chart.Theme = Bunifu.DataViz.WinForms.BunifuDataViz._theme.theme3;
             this.chart.Title = "";
@@ -680,6 +664,21 @@
             this.DockControl.TitleBarOptions.TitleBarControl = null;
             this.DockControl.TitleBarOptions.UseBackColorOnDockingIndicators = false;
             // 
+            // bunifuCards1
+            // 
+            this.bunifuCards1.BackColor = System.Drawing.Color.White;
+            this.bunifuCards1.BorderRadius = 5;
+            this.bunifuCards1.BottomSahddow = true;
+            this.bunifuCards1.color = System.Drawing.Color.Tomato;
+            this.bunifuTransition1.SetDecoration(this.bunifuCards1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
+            this.bunifuCards1.LeftSahddow = false;
+            this.bunifuCards1.Location = new System.Drawing.Point(17, 16);
+            this.bunifuCards1.Name = "bunifuCards1";
+            this.bunifuCards1.RightSahddow = true;
+            this.bunifuCards1.ShadowDepth = 20;
+            this.bunifuCards1.Size = new System.Drawing.Size(440, 280);
+            this.bunifuCards1.TabIndex = 0;
+            // 
             // fProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -716,7 +715,6 @@
         private Bunifu.UI.WinForms.BunifuPages bunifuPages1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private Bunifu.Framework.UI.BunifuDropdown bunifuDropdown1;
         private System.Windows.Forms.TabPage tabPage3;
         private Bunifu.DataViz.WinForms.BunifuDataViz chart;
         private Bunifu.Framework.UI.BunifuGradientPanel panelLeft;
@@ -728,5 +726,6 @@
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnData;
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnHome;
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton bunifuButton1;
+        private Bunifu.Framework.UI.BunifuCards bunifuCards1;
     }
 }
