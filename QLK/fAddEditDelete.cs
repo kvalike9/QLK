@@ -109,13 +109,6 @@ namespace QLK
             dtgvUnit.Columns.Add(addButtonDataGrid("Delete"));
             dtgvUnit.Columns[2].Width = 40;
             dtgvUnit.Columns[3].Width = 60;
-            bunifuDataGridView2.DataSource = UnitDAO.Ins.LoadUnit();
-            DataGridViewComboBoxColumn cbx = new DataGridViewComboBoxColumn();
-            cbx.HeaderText = "List";
-            cbx.DataSource = UserRolesDAO.Ins.LoadUserRoles();
-            cbx.DisplayMember = "DisplayName";
-            cbx.ValueMember = "Id";
-            bunifuDataGridView2.Columns.Add(cbx);
             //dtgvUnit.Columns.Add(cbx);
         }
 

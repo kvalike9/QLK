@@ -73,6 +73,9 @@
     <Reference Include="Bunifu.UI.WinForms.BunifuRadioButton">
       <HintPath>..\..\..\QLPK\Bunifu-Dataviz-Advanced-1.1.1.5\Bunifu UI WinForms 1.11.5.1\Bunifu.UI.WinForms.BunifuRadioButton.dll</HintPath>
     </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuScrollBar">
+      <HintPath>..\..\..\Bunifu UI WinForms 1.11.5.1\Bunifu.UI.WinForms.BunifuScrollBar.dll</HintPath>
+    </Reference>
     <Reference Include="Bunifu.UI.WinForms.BunifuTextbox">
       <HintPath>..\..\..\QLPK\Bunifu-Dataviz-Advanced-1.1.1.5\Bunifu UI WinForms 1.11.5.1\Bunifu.UI.WinForms.BunifuTextbox.dll</HintPath>
     </Reference>
@@ -95,6 +98,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.Extensions" />
@@ -114,6 +118,7 @@
     <Compile Include="DAO\CustomerDAO.cs" />
     <Compile Include="DAO\GenerationDAO.cs" />
     <Compile Include="DAO\SupplierDAO.cs" />
+    <Compile Include="DAO\TonKhoDAO.cs" />
     <Compile Include="DAO\UnitDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="DAO\UserRolesDAO.cs" />
@@ -127,6 +132,7 @@
     <Compile Include="DTO\Output.cs" />
     <Compile Include="DTO\OutputInfo.cs" />
     <Compile Include="DTO\Supplier.cs" />
+    <Compile Include="DTO\TonKho.cs" />
     <Compile Include="DTO\Unit.cs" />
     <Compile Include="DTO\User.cs" />
     <Compile Include="DTO\UserRole.cs" />

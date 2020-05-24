@@ -31,7 +31,9 @@ namespace QLK
         private void fProfile_Load(object sender, EventArgs e)
         {
             addControlDock();
-            ChartRender();
+            //ChartRender();
+            TonKhoChart();
+            dtgvTonKho.DataSource = TonKhoDAO.Ins.LoadTonKho();
         }
 
         private void ChartRender()
@@ -46,6 +48,37 @@ namespace QLK
             }
             canvas.addData(dataPoint);
             chart.Render(canvas);
+        }
+
+        private void TonKhoChart()
+        {
+            List<Color> colors = new List<Color>();
+            colors.Add(Color.FromArgb(39, 240, 157));
+            colors.Add(Color.FromArgb(11, 180, 225));
+            colors.Add(Color.FromArgb(255, 178, 53));
+            colors.Add(Color.LavenderBlush);
+            DataTable data = new DataTable();
+            data = TonKhoDAO.Ins.TonKhoChart();
+            Bunifu.DataViz.WinForms.Canvas canvas = new Bunifu.DataViz.WinForms.Canvas();
+            Bunifu.DataViz.WinForms.DataPoint dataPoint = new Bunifu.DataViz.WinForms.DataPoint(Bunifu.DataViz.WinForms.BunifuDataViz._type.Bunifu_column);
+            Bunifu.DataViz.WinForms.DataPoint dataPoint2 = new Bunifu.DataViz.WinForms.DataPoint(Bunifu.DataViz.WinForms.BunifuDataViz._type.Bunifu_column);
+            Bunifu.DataViz.WinForms.DataPoint dataPoint3 = new Bunifu.DataViz.WinForms.DataPoint(Bunifu.DataViz.WinForms.BunifuDataViz._type.Bunifu_column);
+            int i = 0;
+            foreach (DataRow row in data.Rows)
+            {
+                dataPoint.addLabely(row["TenHang"].ToString(), row["TongNhap"].ToString());
+                dataPoint2.addLabely(row["TenHang"].ToString(), row["TongXuat"].ToString());
+                dataPoint3.addLabely(row["TenHang"].ToString(), row["Ton"].ToString());
+                //MessageBox.Show(row["Ton"].ToString());
+                i += 150;
+                chart.Width = i;
+            }
+            canvas.addData(dataPoint);
+            canvas.addData(dataPoint2);
+            canvas.addData(dataPoint3);
+            chart.colorSet.AddRange(colors);
+            chart.Render(canvas);
+            
         }
 
         private void addControlDock()
@@ -77,6 +110,7 @@ namespace QLK
         {
             ChangeSprtr(sender, e);
             bunifuPages1.SetPage(2);
+            TonKhoChart();
         }
 
         private void ChangeSprtr(object sender, EventArgs e)
@@ -123,7 +157,5 @@ namespace QLK
             fAddEditDelete f = new fAddEditDelete();
             f.ShowDialog();
         }
-
-        
     }
 }
