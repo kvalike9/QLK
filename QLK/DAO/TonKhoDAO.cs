@@ -35,5 +35,10 @@ namespace QLK.DAO
             }
             return tonKhos;
         }
+        public DataTable LoadNhapXuatNgay(string NgayNhapXuat)
+        {
+            DataTable data = ConnectionDAO.Ins.ExecuteQuery("sp_ShowNhapXuatNgay @Day ", new object[] { NgayNhapXuat });
+            return data;
+        }
     }
 }

@@ -34,6 +34,7 @@ namespace QLK
             //ChartRender();
             TonKhoChart();
             dtgvTonKho.DataSource = TonKhoDAO.Ins.LoadTonKho();
+            LoadNhapXuatNgay();
         }
 
         private void ChartRender()
@@ -70,7 +71,7 @@ namespace QLK
                 dataPoint2.addLabely(row["TenHang"].ToString(), row["TongXuat"].ToString());
                 dataPoint3.addLabely(row["TenHang"].ToString(), row["Ton"].ToString());
                 //MessageBox.Show(row["Ton"].ToString());
-                i += 150;
+                i += 250;
                 chart.Width = i;
             }
             canvas.addData(dataPoint);
@@ -98,6 +99,37 @@ namespace QLK
             ChangeSprtr(sender, e);
             //MessageBox.Show("CLick me!");
             bunifuPages1.SetPage(0);
+            LoadNhapXuatNgay();
+        }
+
+        private void LoadNhapXuatNgay()
+        {
+            DataTable data = new DataTable();
+            //data = TonKhoDAO.Ins.LoadNhapXuatNgay(dtpkDate.Value.ToString("yyyy/MM/dd"));
+            string Day = dtpkDate.Value.ToString("yyyy/MM/dd");
+            data = TonKhoDAO.Ins.LoadNhapXuatNgay(Day);
+            int TongNhap = 0, TongXuat = 0;
+            int a = 0;
+            foreach (DataRow row in data.Rows)
+            {
+                //TongNhap = int.TryParse(row["TongNhap"].ToString(),out TongNhap);
+                //TongXuat = int.Parse(row["TongXuat"].ToString());
+                int number;
+
+                bool CheckNumberNhap = Int32.TryParse(row["TongNhap"].ToString(), out number);
+                if (CheckNumberNhap)
+                {
+                    TongNhap = number;
+                }
+                bool CheckNumberXuat = Int32.TryParse(row["TongXuat"].ToString(), out number);
+                if (CheckNumberNhap)
+                {
+                    TongXuat = number;
+                }
+
+            }
+            LBNhap.Text = "Nhập: " + TongNhap;
+            LBXuat.Text = "Xuất: " + TongXuat;
         }
 
         private void btnData_Click(object sender, EventArgs e)
@@ -156,6 +188,11 @@ namespace QLK
         {
             fAddEditDelete f = new fAddEditDelete();
             f.ShowDialog();
+        }
+
+        private void dtpkDate_ValueChanged(object sender, EventArgs e)
+        {
+            LoadNhapXuatNgay();
         }
     }
 }
