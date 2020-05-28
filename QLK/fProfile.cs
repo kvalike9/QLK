@@ -35,6 +35,20 @@ namespace QLK
             TonKhoChart();
             dtgvTonKho.DataSource = TonKhoDAO.Ins.LoadTonKho();
             LoadNhapXuatNgay();
+            LoadSanPham();
+        }
+
+        private void LoadSanPham()
+        {
+            try
+            {
+                dtgvObject.DataSource = SanPhamDAO.Ins.LoadSanPham();
+            }
+            catch
+            {
+
+                throw;
+            }
         }
 
         private void ChartRender()
