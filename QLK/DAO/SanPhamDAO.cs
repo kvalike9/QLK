@@ -31,5 +31,11 @@ namespace QLK.DAO
             }
             return sanPhams;
         }
+
+        public bool CreateSanPham(string Ma, string DisplayName, int IdUnit, int IdSupplier, int IdGenera, int IdColor)
+        {
+            int re = ConnectionDAO.Ins.ExecuteNonQuery("sp_AddObject @Ma , @DisplayName , @IdUnit , @IdSupplier , @IdGenera , @IdColorAL", new object[] { Ma, DisplayName, IdUnit, IdSupplier, IdGenera, IdColor });
+            return re > 0;
+        }
     }
 }

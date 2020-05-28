@@ -157,6 +157,23 @@ namespace QLK
             ChangeSprtr(sender, e);
             bunifuPages1.SetPage(2);
             TonKhoChart();
+            LoadDDAll();
+        }
+
+        private void LoadDDAll()
+        {
+            ddUnit.DataSource = UnitDAO.Ins.LoadUnit();
+            ddUnit.DisplayMember = "DisplayName";
+            ddUnit.ValueMember = "Id";
+            ddSupplier.DataSource = SupplierDAO.Ins.LoadSupplier();
+            ddSupplier.DisplayMember = "DisplayName";
+            ddSupplier.ValueMember = "Id";
+            ddGenera.DataSource = GenerationDAO.Ins.LoadGeneration();
+            ddGenera.DisplayMember = "DisplayName";
+            ddGenera.ValueMember = "Id";
+            ddColor.DataSource = ColorALDAO.Ins.LoadColor();
+            ddColor.DisplayMember = "DisplayName";
+            ddColor.ValueMember = "Id";
         }
 
         private void ChangeSprtr(object sender, EventArgs e)
@@ -207,6 +224,19 @@ namespace QLK
         private void dtpkDate_ValueChanged(object sender, EventArgs e)
         {
             LoadNhapXuatNgay();
+        }
+
+        private void btnSanPhamAdd_Click(object sender, EventArgs e)
+        {
+            if (SanPhamDAO.Ins.CreateSanPham("SP", txtNameSanPham.Text, int.Parse(ddUnit.SelectedValue.ToString()), int.Parse(ddSupplier.SelectedValue.ToString()), int.Parse(ddGenera.SelectedValue.ToString()), int.Parse(ddColor.SelectedValue.ToString())))
+            {
+                MessageBox.Show("Tạo thành công");
+                LoadSanPham();
+            }
+            else
+            {
+                MessageBox.Show("Chắc có lỗi gì đó :V");
+            }
         }
     }
 }
