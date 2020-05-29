@@ -15,12 +15,12 @@ namespace QLK
 {
     public partial class fProfile : Form
     {
-        private User loginUser;
+        //private User loginUser;
 
-        public User LoginUser {
-            get  { return loginUser; }
-            set { loginUser = value; }
-        }
+        //public User LoginUser {
+        //    get  { return loginUser; }
+        //    set { loginUser = value; }
+        //}
 
         public fProfile(User user)
         {
@@ -290,6 +290,11 @@ namespace QLK
         {
             fAddEditDelete f = new fAddEditDelete();
             f.ShowDialog();
+        }
+
+        private void dtgvInput_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            fMoreInfo f = new fMoreInfo();
         }
     }
 }

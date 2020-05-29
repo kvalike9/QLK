@@ -12,7 +12,7 @@ namespace QLK
 {
     public partial class fMoreInfo : Form
     {
-        public fMoreInfo()
+        public fMoreInfo(string a)
         {
             InitializeComponent();
         }
