@@ -62,14 +62,18 @@
             this.txtOutputPrice = new Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox();
             this.txtCount = new Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox();
             this.txtStatus = new Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox();
+            this.btnClose = new System.Windows.Forms.PictureBox();
+            this.DockControl = new Bunifu.UI.WinForms.BunifuFormDock();
             this.bunifuGradientPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvInputInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuGradientPanel4
             // 
             this.bunifuGradientPanel4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuGradientPanel4.BackgroundImage")));
             this.bunifuGradientPanel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bunifuGradientPanel4.Controls.Add(this.btnClose);
             this.bunifuGradientPanel4.Controls.Add(this.txtStatus);
             this.bunifuGradientPanel4.Controls.Add(this.txtCount);
             this.bunifuGradientPanel4.Controls.Add(this.txtOutputPrice);
@@ -88,7 +92,7 @@
             this.bunifuGradientPanel4.Location = new System.Drawing.Point(0, 0);
             this.bunifuGradientPanel4.Name = "bunifuGradientPanel4";
             this.bunifuGradientPanel4.Quality = 10;
-            this.bunifuGradientPanel4.Size = new System.Drawing.Size(400, 700);
+            this.bunifuGradientPanel4.Size = new System.Drawing.Size(500, 700);
             this.bunifuGradientPanel4.TabIndex = 13;
             // 
             // btnInputInfoAdd
@@ -150,11 +154,12 @@
             stateProperties18.IconLeftImage = null;
             stateProperties18.IconRightImage = null;
             this.btnInputInfoAdd.OnPressedState = stateProperties18;
-            this.btnInputInfoAdd.Size = new System.Drawing.Size(380, 45);
+            this.btnInputInfoAdd.Size = new System.Drawing.Size(480, 45);
             this.btnInputInfoAdd.TabIndex = 17;
             this.btnInputInfoAdd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnInputInfoAdd.TextMarginLeft = 0;
             this.btnInputInfoAdd.UseDefaultRadiusAndThickness = true;
+            this.btnInputInfoAdd.Click += new System.EventHandler(this.btnInputInfoAdd_Click);
             // 
             // dtgvInputInfo
             // 
@@ -216,7 +221,7 @@
             this.dtgvInputInfo.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dtgvInputInfo.RowTemplate.Height = 40;
             this.dtgvInputInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgvInputInfo.Size = new System.Drawing.Size(371, 297);
+            this.dtgvInputInfo.Size = new System.Drawing.Size(471, 297);
             this.dtgvInputInfo.TabIndex = 18;
             this.dtgvInputInfo.Theme = Bunifu.UI.WinForms.BunifuDataGridView.PresetThemes.Light;
             // 
@@ -226,7 +231,7 @@
             this.lbID.CursorType = null;
             this.lbID.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lbID.ForeColor = System.Drawing.Color.White;
-            this.lbID.Location = new System.Drawing.Point(3, 3);
+            this.lbID.Location = new System.Drawing.Point(0, 0);
             this.lbID.Name = "lbID";
             this.lbID.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lbID.Size = new System.Drawing.Size(106, 23);
@@ -242,7 +247,7 @@
             this.lbDate.CursorType = null;
             this.lbDate.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lbDate.ForeColor = System.Drawing.Color.White;
-            this.lbDate.Location = new System.Drawing.Point(213, 0);
+            this.lbDate.Location = new System.Drawing.Point(182, 0);
             this.lbDate.Name = "lbDate";
             this.lbDate.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lbDate.Size = new System.Drawing.Size(187, 23);
@@ -253,9 +258,10 @@
             // 
             // ddSanPham
             // 
-            this.ddSanPham.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ddSanPham.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ddSanPham.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(176)))), ((int)(((byte)(255)))));
-            this.ddSanPham.BorderRadius = 19;
+            this.ddSanPham.BorderRadius = 15;
             this.ddSanPham.Color = System.Drawing.Color.White;
             this.ddSanPham.Direction = Bunifu.UI.WinForms.BunifuDropdown.Directions.Down;
             this.ddSanPham.DisabledColor = System.Drawing.Color.Gray;
@@ -277,12 +283,12 @@
             this.ddSanPham.IntegralHeight = false;
             this.ddSanPham.ItemBackColor = System.Drawing.Color.White;
             this.ddSanPham.ItemBorderColor = System.Drawing.Color.White;
-            this.ddSanPham.ItemForeColor = System.Drawing.Color.White;
+            this.ddSanPham.ItemForeColor = System.Drawing.Color.Black;
             this.ddSanPham.ItemHeight = 30;
             this.ddSanPham.ItemHighLightColor = System.Drawing.Color.LightSteelBlue;
-            this.ddSanPham.Location = new System.Drawing.Point(7, 80);
+            this.ddSanPham.Location = new System.Drawing.Point(7, 88);
             this.ddSanPham.Name = "ddSanPham";
-            this.ddSanPham.Size = new System.Drawing.Size(385, 36);
+            this.ddSanPham.Size = new System.Drawing.Size(485, 36);
             this.ddSanPham.TabIndex = 21;
             this.ddSanPham.Text = "Sản phẩm";
             // 
@@ -295,10 +301,10 @@
             this.lbSupplier.CursorType = null;
             this.lbSupplier.Font = new System.Drawing.Font("Segoe UI", 16F);
             this.lbSupplier.ForeColor = System.Drawing.Color.White;
-            this.lbSupplier.Location = new System.Drawing.Point(0, 35);
+            this.lbSupplier.Location = new System.Drawing.Point(0, 53);
             this.lbSupplier.Name = "lbSupplier";
             this.lbSupplier.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lbSupplier.Size = new System.Drawing.Size(400, 25);
+            this.lbSupplier.Size = new System.Drawing.Size(500, 25);
             this.lbSupplier.TabIndex = 22;
             this.lbSupplier.Text = "Phiếu nhập";
             this.lbSupplier.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -308,7 +314,6 @@
             // 
             this.txtnputPrice.AcceptsReturn = false;
             this.txtnputPrice.AcceptsTab = false;
-            this.txtnputPrice.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtnputPrice.AnimationSpeed = 200;
             this.txtnputPrice.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
             this.txtnputPrice.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
@@ -368,7 +373,7 @@
             this.txtnputPrice.SelectionLength = 0;
             this.txtnputPrice.SelectionStart = 0;
             this.txtnputPrice.ShortcutsEnabled = true;
-            this.txtnputPrice.Size = new System.Drawing.Size(192, 45);
+            this.txtnputPrice.Size = new System.Drawing.Size(242, 45);
             this.txtnputPrice.Style = Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox._Style.Bunifu;
             this.txtnputPrice.TabIndex = 23;
             this.txtnputPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -383,7 +388,7 @@
             // 
             this.txtOutputPrice.AcceptsReturn = false;
             this.txtOutputPrice.AcceptsTab = false;
-            this.txtOutputPrice.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtOutputPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOutputPrice.AnimationSpeed = 200;
             this.txtOutputPrice.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
             this.txtOutputPrice.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
@@ -408,7 +413,7 @@
             this.txtOutputPrice.IconRight = null;
             this.txtOutputPrice.IconRightCursor = System.Windows.Forms.Cursors.IBeam;
             this.txtOutputPrice.Lines = new string[0];
-            this.txtOutputPrice.Location = new System.Drawing.Point(200, 130);
+            this.txtOutputPrice.Location = new System.Drawing.Point(250, 130);
             this.txtOutputPrice.MaxLength = 32767;
             this.txtOutputPrice.MinimumSize = new System.Drawing.Size(100, 35);
             this.txtOutputPrice.Modified = false;
@@ -443,7 +448,7 @@
             this.txtOutputPrice.SelectionLength = 0;
             this.txtOutputPrice.SelectionStart = 0;
             this.txtOutputPrice.ShortcutsEnabled = true;
-            this.txtOutputPrice.Size = new System.Drawing.Size(192, 45);
+            this.txtOutputPrice.Size = new System.Drawing.Size(242, 45);
             this.txtOutputPrice.Style = Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox._Style.Bunifu;
             this.txtOutputPrice.TabIndex = 24;
             this.txtOutputPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -458,7 +463,8 @@
             // 
             this.txtCount.AcceptsReturn = false;
             this.txtCount.AcceptsTab = false;
-            this.txtCount.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCount.AnimationSpeed = 200;
             this.txtCount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
             this.txtCount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
@@ -518,7 +524,7 @@
             this.txtCount.SelectionLength = 0;
             this.txtCount.SelectionStart = 0;
             this.txtCount.ShortcutsEnabled = true;
-            this.txtCount.Size = new System.Drawing.Size(385, 45);
+            this.txtCount.Size = new System.Drawing.Size(485, 45);
             this.txtCount.Style = Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox._Style.Bunifu;
             this.txtCount.TabIndex = 25;
             this.txtCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -533,7 +539,8 @@
             // 
             this.txtStatus.AcceptsReturn = false;
             this.txtStatus.AcceptsTab = false;
-            this.txtStatus.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStatus.AnimationSpeed = 200;
             this.txtStatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
             this.txtStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
@@ -593,7 +600,7 @@
             this.txtStatus.SelectionLength = 0;
             this.txtStatus.SelectionStart = 0;
             this.txtStatus.ShortcutsEnabled = true;
-            this.txtStatus.Size = new System.Drawing.Size(385, 100);
+            this.txtStatus.Size = new System.Drawing.Size(485, 100);
             this.txtStatus.Style = Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox._Style.Bunifu;
             this.txtStatus.TabIndex = 26;
             this.txtStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -604,12 +611,66 @@
             this.txtStatus.UseSystemPasswordChar = false;
             this.txtStatus.WordWrap = true;
             // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.BackColor = System.Drawing.Color.Transparent;
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
+            this.btnClose.Location = new System.Drawing.Point(476, 0);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(24, 24);
+            this.btnClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnClose.TabIndex = 27;
+            this.btnClose.TabStop = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // DockControl
+            // 
+            this.DockControl.AllowFormDragging = true;
+            this.DockControl.AllowFormDropShadow = true;
+            this.DockControl.AllowFormResizing = true;
+            this.DockControl.AllowHidingBottomRegion = true;
+            this.DockControl.AllowOpacityChangesWhileDragging = false;
+            this.DockControl.BorderOptions.BottomBorder.BorderColor = System.Drawing.Color.Silver;
+            this.DockControl.BorderOptions.BottomBorder.BorderThickness = 1;
+            this.DockControl.BorderOptions.BottomBorder.ShowBorder = true;
+            this.DockControl.BorderOptions.LeftBorder.BorderColor = System.Drawing.Color.Silver;
+            this.DockControl.BorderOptions.LeftBorder.BorderThickness = 1;
+            this.DockControl.BorderOptions.LeftBorder.ShowBorder = true;
+            this.DockControl.BorderOptions.RightBorder.BorderColor = System.Drawing.Color.Silver;
+            this.DockControl.BorderOptions.RightBorder.BorderThickness = 1;
+            this.DockControl.BorderOptions.RightBorder.ShowBorder = true;
+            this.DockControl.BorderOptions.TopBorder.BorderColor = System.Drawing.Color.Silver;
+            this.DockControl.BorderOptions.TopBorder.BorderThickness = 1;
+            this.DockControl.BorderOptions.TopBorder.ShowBorder = true;
+            this.DockControl.ContainerControl = this;
+            this.DockControl.DockingIndicatorsColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(215)))), ((int)(((byte)(233)))));
+            this.DockControl.DockingIndicatorsOpacity = 0.5D;
+            this.DockControl.DockingOptions.DockAll = true;
+            this.DockControl.DockingOptions.DockBottomLeft = true;
+            this.DockControl.DockingOptions.DockBottomRight = true;
+            this.DockControl.DockingOptions.DockFullScreen = true;
+            this.DockControl.DockingOptions.DockLeft = true;
+            this.DockControl.DockingOptions.DockRight = true;
+            this.DockControl.DockingOptions.DockTopLeft = true;
+            this.DockControl.DockingOptions.DockTopRight = true;
+            this.DockControl.FormDraggingOpacity = 0.9D;
+            this.DockControl.ParentForm = this;
+            this.DockControl.ShowCursorChanges = true;
+            this.DockControl.ShowDockingIndicators = true;
+            this.DockControl.TitleBarOptions.AllowFormDragging = true;
+            this.DockControl.TitleBarOptions.BunifuFormDock = this.DockControl;
+            this.DockControl.TitleBarOptions.DoubleClickToExpandWindow = true;
+            this.DockControl.TitleBarOptions.TitleBarControl = null;
+            this.DockControl.TitleBarOptions.UseBackColorOnDockingIndicators = false;
+            // 
             // fMoreInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(176)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(400, 700);
+            this.ClientSize = new System.Drawing.Size(500, 700);
             this.Controls.Add(this.bunifuGradientPanel4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "fMoreInfo";
@@ -618,6 +679,7 @@
             this.bunifuGradientPanel4.ResumeLayout(false);
             this.bunifuGradientPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvInputInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -635,5 +697,7 @@
         private Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox txtnputPrice;
         private Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox txtStatus;
         private Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox txtCount;
+        private System.Windows.Forms.PictureBox btnClose;
+        private Bunifu.UI.WinForms.BunifuFormDock DockControl;
     }
 }

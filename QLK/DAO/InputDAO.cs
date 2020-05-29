@@ -44,9 +44,37 @@ namespace QLK.DAO
             return inputs;
         }
 
+        public List<PhieuNhap> LoadInputInfobyid(string id)
+        {
+            List<PhieuNhap> inputs = new List<PhieuNhap>();
+            DataTable data = ConnectionDAO.Ins.ExecuteQuery("sp_ShowInputInfoByDateId @Day ", new object[] { id });
+            foreach (DataRow item in data.Rows)
+            {
+                PhieuNhap input = new PhieuNhap(item);
+                inputs.Add(input);
+            }
+            return inputs;
+        }
+
         public bool CreateInput(string Ma)
         {
             int re = ConnectionDAO.Ins.ExecuteNonQuery("sp_InputTime @Ma ", new object[] { Ma });
+            return re > 0;
+        }
+
+        public bool CreateInputInfo(string Ma, string IdObject, string IdInput, int Count, double InputPrice, double OutputPrice, string Status)
+        {
+            int re = ConnectionDAO.Ins.ExecuteNonQuery("sp_AddInputInfo @Ma , @IdObjedt , @IdInput , @Count , @InputPrice , @OutputPrice , @Status ", new object[] { Ma , IdObject , IdInput , Count , InputPrice , OutputPrice , Status });
+            return re > 0;
+        }
+        public bool DeleteInputInfo(string id)
+        {
+            int re = ConnectionDAO.Ins.ExecuteNonQuery("sp_DeleteInputInfo @Id ", new object[] { id });
+            return re > 0;
+        }
+        public bool DeleteInputDate(string id)
+        {
+            int re = ConnectionDAO.Ins.ExecuteNonQuery("sp_DeleteInputDate @Id ", new object[] { id });
             return re > 0;
         }
     }

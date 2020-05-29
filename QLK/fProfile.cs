@@ -106,8 +106,8 @@ namespace QLK
         {
             ChangeSprtr(sender, e);
             bunifuPages1.SetPage(3);
-            lbInputTile.Text = "Danh sách tất cả phiếu nhập";
-            LoadInput();
+            lbInputTile.Text = "Danh sách phiếu nhập ngày: " + dtpkInput.Value.ToString("dd/MM/yyyy");
+            LoadInputByDay();
         }
 
         private void btnOutput_Click(object sender, EventArgs e)
@@ -136,6 +136,15 @@ namespace QLK
             Sprtr.Top = ((BunifuButton)sender).Top + 2;
         }
         //Load All item Start
+        private DataGridViewButtonColumn addButtonDataGrid(string name)
+        {
+            DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
+            btn.HeaderText = name;
+            btn.Name = "button";
+            btn.Text = name;
+            btn.UseColumnTextForButtonValue = true;
+            return btn;
+        }
         private void LoadDDAll()
         {
             ddUnit.DataSource = UnitDAO.Ins.LoadUnit();
@@ -196,12 +205,18 @@ namespace QLK
 
         private void LoadInput()
         {
+            dtgvInput.Columns.Clear();
             dtgvInput.DataSource = InputDAO.Ins.LoadInput();
+            dtgvInput.Columns.Add(addButtonDataGrid("Edit"));
+            dtgvInput.Columns.Add(addButtonDataGrid("Delete"));
         }
 
         private void LoadInputByDay()
         {
+            dtgvInput.Columns.Clear();
             dtgvInput.DataSource = InputDAO.Ins.LoadInputByDay(dtpkInput.Value.ToString("yyyy-MM-dd"));
+            dtgvInput.Columns.Add(addButtonDataGrid("Edit"));
+            dtgvInput.Columns.Add(addButtonDataGrid("Delete"));
         }
         //Load all item end
 
@@ -294,7 +309,34 @@ namespace QLK
 
         private void dtgvInput_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            fMoreInfo f = new fMoreInfo();
+            if (e.RowIndex != -1 && e.ColumnIndex == 2)
+            {
+                string id = dtgvInput.Rows[e.RowIndex].Cells["Id"].Value.ToString();
+                string dateinput = dtgvInput.Rows[e.RowIndex].Cells["DateInput"].Value.ToString();
+                fMoreInfo f = new fMoreInfo(id, dateinput);
+                f.ShowDialog();
+            }
+            if (e.RowIndex != -1 && e.ColumnIndex == 3)
+            {
+                string mess = dtgvInput.Rows[e.RowIndex].Cells["DateInput"].Value.ToString();
+                if (MessageBox.Show("Bạn chắc chắn muốn xóa \"" + mess + "\"", "Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    string Id = dtgvInput.Rows[e.RowIndex].Cells["Id"].Value.ToString();
+                    try
+                    {
+                        if (InputDAO.Ins.DeleteInputDate(Id))
+                        {
+                            LoadInputByDay();
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Phiếu nhập này không thể xóa");
+                    }
+
+                }
+            }
+
         }
     }
 }

@@ -134,6 +134,7 @@
     <Compile Include="DTO\Objects.cs" />
     <Compile Include="DTO\Output.cs" />
     <Compile Include="DTO\OutputInfo.cs" />
+    <Compile Include="DTO\PhieuNhap.cs" />
     <Compile Include="DTO\SanPham.cs" />
     <Compile Include="DTO\Supplier.cs" />
     <Compile Include="DTO\TonKho.cs" />
