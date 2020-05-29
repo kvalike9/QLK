@@ -106,7 +106,7 @@ namespace QLK
         {
             ChangeSprtr(sender, e);
             bunifuPages1.SetPage(3);
-            lbInputTile.Text = "Danh sách tất cả phiếu thu";
+            lbInputTile.Text = "Danh sách tất cả phiếu nhập";
             LoadInput();
         }
 
@@ -264,13 +264,13 @@ namespace QLK
 
         private void btnInputShow_Click(object sender, EventArgs e)
         {
-            lbInputTile.Text = "Danh sách phiếu thu ngày: " + dtpkInput.Value.ToString("dd/MM/yyyy");
+            lbInputTile.Text = "Danh sách phiếu nhập ngày: " + dtpkInput.Value.ToString("dd/MM/yyyy");
             LoadInputByDay();
         }
 
         private void btnInputShowAll_Click(object sender, EventArgs e)
         {
-            lbInputTile.Text = "Danh sách tất cả phiếu thu";
+            lbInputTile.Text = "Danh sách tất cả phiếu nhập";
             LoadInput();
         }
 
@@ -284,6 +284,12 @@ namespace QLK
             {
                 MessageBox.Show("Lỗi kết nối :v");
             }
+        }
+
+        private void btnSetting_Click(object sender, EventArgs e)
+        {
+            fAddEditDelete f = new fAddEditDelete();
+            f.ShowDialog();
         }
     }
 }
