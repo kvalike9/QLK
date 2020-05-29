@@ -117,6 +117,7 @@
     <Compile Include="DAO\ConnectionDAO.cs" />
     <Compile Include="DAO\CustomerDAO.cs" />
     <Compile Include="DAO\GenerationDAO.cs" />
+    <Compile Include="DAO\InputDAO.cs" />
     <Compile Include="DAO\SanPhamDAO.cs" />
     <Compile Include="DAO\SupplierDAO.cs" />
     <Compile Include="DAO\TonKhoDAO.cs" />
@@ -153,6 +154,12 @@
     <Compile Include="fMain.Designer.cs">
       <DependentUpon>fMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="fMoreInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fMoreInfo.Designer.cs">
+      <DependentUpon>fMoreInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="fProfile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fMain.resx">
       <DependentUpon>fMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fMoreInfo.resx">
+      <DependentUpon>fMoreInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fProfile.resx">
       <DependentUpon>fProfile.cs</DependentUpon>

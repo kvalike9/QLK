@@ -37,33 +37,20 @@ namespace QLK
             LoadNhapXuatNgay();
             LoadSanPham();
         }
-
-        private void LoadSanPham()
-        {
-            try
-            {
-                dtgvObject.DataSource = SanPhamDAO.Ins.LoadSanPham();
-            }
-            catch
-            {
-
-                throw;
-            }
-        }
-
-        private void ChartRender()
-        {
-            Bunifu.DataViz.WinForms.Canvas canvas = new Bunifu.DataViz.WinForms.Canvas();
-            Bunifu.DataViz.WinForms.DataPoint dataPoint = new Bunifu.DataViz.WinForms.DataPoint(Bunifu.DataViz.WinForms.BunifuDataViz._type.Bunifu_column);
-            Random random = new Random();
-            for (int i = 0; i < 20; i++)
-            {
-                //dataPoint.addxy("new Date (2020, 4, "+i+")", random.Next(1, 100));
-                dataPoint.addxy("new Date (2020, 10, " + i + ")", random.Next(1, 100));
-            }
-            canvas.addData(dataPoint);
-            chart.Render(canvas);
-        }
+        
+        //private void ChartRender()
+        //{
+        //    Bunifu.DataViz.WinForms.Canvas canvas = new Bunifu.DataViz.WinForms.Canvas();
+        //    Bunifu.DataViz.WinForms.DataPoint dataPoint = new Bunifu.DataViz.WinForms.DataPoint(Bunifu.DataViz.WinForms.BunifuDataViz._type.Bunifu_column);
+        //    Random random = new Random();
+        //    for (int i = 0; i < 20; i++)
+        //    {
+        //        //dataPoint.addxy("new Date (2020, 4, "+i+")", random.Next(1, 100));
+        //        dataPoint.addxy("new Date (2020, 10, " + i + ")", random.Next(1, 100));
+        //    }
+        //    canvas.addData(dataPoint);
+        //    chart.Render(canvas);
+        //}
 
         private void TonKhoChart()
         {
@@ -107,7 +94,7 @@ namespace QLK
                 tabPage2
             }, false);
         }
-
+        //button set Page start
         private void btnHome_Click(object sender, EventArgs e)
         {
             ChangeSprtr(sender, e);
@@ -115,7 +102,55 @@ namespace QLK
             bunifuPages1.SetPage(0);
             LoadNhapXuatNgay();
         }
+        private void btnInput_Click(object sender, EventArgs e)
+        {
+            ChangeSprtr(sender, e);
+            bunifuPages1.SetPage(3);
+            lbInputTile.Text = "Danh sách tất cả phiếu thu";
+            LoadInput();
+        }
 
+        private void btnOutput_Click(object sender, EventArgs e)
+        {
+            ChangeSprtr(sender, e);
+            bunifuPages1.SetPage(4);
+        }
+
+        private void btnData_Click(object sender, EventArgs e)
+        {
+            ChangeSprtr(sender, e);
+            bunifuPages1.SetPage(1);
+        }
+
+        private void btnChart_Click(object sender, EventArgs e)
+        {
+            ChangeSprtr(sender, e);
+            bunifuPages1.SetPage(2);
+            TonKhoChart();
+            LoadDDAll();
+        }
+        //button set pgae end
+        private void ChangeSprtr(object sender, EventArgs e)
+        {
+            Sprtr.Height = ((BunifuButton)sender).Height - 4;
+            Sprtr.Top = ((BunifuButton)sender).Top + 2;
+        }
+        //Load All item Start
+        private void LoadDDAll()
+        {
+            ddUnit.DataSource = UnitDAO.Ins.LoadUnit();
+            ddUnit.DisplayMember = "DisplayName";
+            ddUnit.ValueMember = "Id";
+            ddSupplier.DataSource = SupplierDAO.Ins.LoadSupplier();
+            ddSupplier.DisplayMember = "DisplayName";
+            ddSupplier.ValueMember = "Id";
+            ddGenera.DataSource = GenerationDAO.Ins.LoadGeneration();
+            ddGenera.DisplayMember = "DisplayName";
+            ddGenera.ValueMember = "Id";
+            ddColor.DataSource = ColorALDAO.Ins.LoadColor();
+            ddColor.DisplayMember = "DisplayName";
+            ddColor.ValueMember = "Id";
+        }
         private void LoadNhapXuatNgay()
         {
             DataTable data = new DataTable();
@@ -146,41 +181,29 @@ namespace QLK
             LBXuat.Text = "Xuất: " + TongXuat;
         }
 
-        private void btnData_Click(object sender, EventArgs e)
+        private void LoadSanPham()
         {
-            ChangeSprtr(sender, e);
-            bunifuPages1.SetPage(1);
+            try
+            {
+                dtgvObject.DataSource = SanPhamDAO.Ins.LoadSanPham();
+            }
+            catch
+            {
+
+                throw;
+            }
         }
 
-        private void btnChart_Click(object sender, EventArgs e)
+        private void LoadInput()
         {
-            ChangeSprtr(sender, e);
-            bunifuPages1.SetPage(2);
-            TonKhoChart();
-            LoadDDAll();
+            dtgvInput.DataSource = InputDAO.Ins.LoadInput();
         }
 
-        private void LoadDDAll()
+        private void LoadInputByDay()
         {
-            ddUnit.DataSource = UnitDAO.Ins.LoadUnit();
-            ddUnit.DisplayMember = "DisplayName";
-            ddUnit.ValueMember = "Id";
-            ddSupplier.DataSource = SupplierDAO.Ins.LoadSupplier();
-            ddSupplier.DisplayMember = "DisplayName";
-            ddSupplier.ValueMember = "Id";
-            ddGenera.DataSource = GenerationDAO.Ins.LoadGeneration();
-            ddGenera.DisplayMember = "DisplayName";
-            ddGenera.ValueMember = "Id";
-            ddColor.DataSource = ColorALDAO.Ins.LoadColor();
-            ddColor.DisplayMember = "DisplayName";
-            ddColor.ValueMember = "Id";
+            dtgvInput.DataSource = InputDAO.Ins.LoadInputByDay(dtpkInput.Value.ToString("yyyy-MM-dd"));
         }
-
-        private void ChangeSprtr(object sender, EventArgs e)
-        {
-            Sprtr.Height = ((BunifuButton)sender).Height - 4;
-            Sprtr.Top = ((BunifuButton)sender).Top + 2;
-        }
+        //Load all item end
 
         private void btnshowhide_Click(object sender, EventArgs e)
         {
@@ -236,6 +259,30 @@ namespace QLK
             else
             {
                 MessageBox.Show("Chắc có lỗi gì đó :V");
+            }
+        }
+
+        private void btnInputShow_Click(object sender, EventArgs e)
+        {
+            lbInputTile.Text = "Danh sách phiếu thu ngày: " + dtpkInput.Value.ToString("dd/MM/yyyy");
+            LoadInputByDay();
+        }
+
+        private void btnInputShowAll_Click(object sender, EventArgs e)
+        {
+            lbInputTile.Text = "Danh sách tất cả phiếu thu";
+            LoadInput();
+        }
+
+        private void btnInputAdd_Click(object sender, EventArgs e)
+        {
+            if (InputDAO.Ins.CreateInput("DA"))
+            {
+                MessageBox.Show("Tạo thành công");
+            }
+            else
+            {
+                MessageBox.Show("Lỗi kết nối :v");
             }
         }
     }
