@@ -118,6 +118,7 @@
     <Compile Include="DAO\CustomerDAO.cs" />
     <Compile Include="DAO\GenerationDAO.cs" />
     <Compile Include="DAO\InputDAO.cs" />
+    <Compile Include="DAO\OutputDAO.cs" />
     <Compile Include="DAO\SanPhamDAO.cs" />
     <Compile Include="DAO\SupplierDAO.cs" />
     <Compile Include="DAO\TonKhoDAO.cs" />

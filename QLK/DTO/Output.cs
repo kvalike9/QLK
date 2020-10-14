@@ -9,22 +9,22 @@ namespace QLK.DTO
 {
     public class Output
     {
-        private int _ID;
+        private string _ID;
         private string _DateOutput;
 
         public Output(DataRow row)
         {
-            this.ID = int.Parse(row["Id"].ToString());
-            this.DateOutput = Convert.ToDateTime(row["DateOutput"].ToString()).ToString("dd/MM/yyyy").ToString();
+            this.ID = row["Id"].ToString();
+            this.DateOutput = Convert.ToDateTime(row["DateOutput"].ToString()).ToString("dd/MM/yyyy hh:mm:ss tt").ToString();
         }
 
-        public Output(int ID, string DateOutput)
+        public Output(string ID, string DateOutput)
         {
             this.ID = ID;
             this.DateOutput = DateOutput;
         }
 
-        public int ID { get => _ID; set => _ID = value; }
+        public string ID { get => _ID; set => _ID = value; }
         public string DateOutput { get => _DateOutput; set => _DateOutput = value; }
     }
 }

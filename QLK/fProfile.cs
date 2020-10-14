@@ -114,6 +114,8 @@ namespace QLK
         {
             ChangeSprtr(sender, e);
             bunifuPages1.SetPage(4);
+            lbOutputTile.Text = ("Danh sách tất cả phiếu xuất");
+            LoadOutput();
         }
 
         private void btnData_Click(object sender, EventArgs e)
@@ -167,7 +169,6 @@ namespace QLK
             string Day = dtpkDate.Value.ToString("yyyy/MM/dd");
             data = TonKhoDAO.Ins.LoadNhapXuatNgay(Day);
             int TongNhap = 0, TongXuat = 0;
-            int a = 0;
             foreach (DataRow row in data.Rows)
             {
                 //TongNhap = int.TryParse(row["TongNhap"].ToString(),out TongNhap);
@@ -217,6 +218,14 @@ namespace QLK
             dtgvInput.DataSource = InputDAO.Ins.LoadInputByDay(dtpkInput.Value.ToString("yyyy-MM-dd"));
             dtgvInput.Columns.Add(addButtonDataGrid("Edit"));
             dtgvInput.Columns.Add(addButtonDataGrid("Delete"));
+        }
+
+        private void LoadOutput()
+        {
+            dtgvOutput.Columns.Clear();
+            dtgvOutput.DataSource = OutputDAO.Ins.LoadOutput();
+            dtgvOutput.Columns.Add(addButtonDataGrid("Edit"));
+            dtgvOutput.Columns.Add(addButtonDataGrid("Delete"));
         }
         //Load all item end
 
